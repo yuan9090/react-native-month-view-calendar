@@ -10,6 +10,7 @@ interface MonthViewProps {
     pastMonthsCellStyles?: ViewStyle;
     cellStyles?: ViewStyle;
     renderEvent: (event: Event, index: number) => any;
+    onPress?: (date: Date) => void;
     onSwipe?: (date: Date) => void;
     onSwipePrev?: (date: Date) => void;
     onSwipeNext?: (date: Date) => void;

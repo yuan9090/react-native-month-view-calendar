@@ -7,13 +7,14 @@ interface CalendarDayProps {
     events: Event[];
     textStyles: {} | [];
     viewStyles: {} | [];
+    onPress?: (date: Date) => void;
 }
 declare class CalendarDay extends React.Component<CalendarDayProps> {
     static defaultProps: {
         textStyles: {};
         viewStyles: {};
     };
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }
 export default CalendarDay;
 //# sourceMappingURL=calendarDay.d.ts.map

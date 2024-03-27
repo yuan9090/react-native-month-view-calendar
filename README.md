@@ -53,6 +53,7 @@ const Component = () => {
 |pastMonthsCellStyles|{}|Styles for all cells from past dates|
 |weekDays        |['S', 'M', 'T', 'W', 'T', 'F', 'S']|Array with name of the day of the week|
 |renderEvent     ||Function required to render event information. Example (event, index) => <Event key={index} />|
+|onPress         ||Callback when day cell is pressed|
 |onSwipe         ||Callback when calendar is swiped|
 |onSwipePrev     ||Callback when calendar is swiped to previous month|
 |onSwipeNext     ||Callback when calendar is swiped to next month|

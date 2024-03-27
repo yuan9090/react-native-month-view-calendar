@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Event } from '../contracts/event';
 
 interface CalendarDayProps {
@@ -9,13 +9,14 @@ interface CalendarDayProps {
     events: Event[];
     textStyles: {} | [];
     viewStyles: {} | [];
+    onPress?: (date: Date) => void;
 }
 
 class CalendarDay extends React.Component<CalendarDayProps> {
   static defaultProps: { textStyles: {}; viewStyles: {}; };
 
   render() {
-    const { index, date, renderEvent, events, textStyles } = this.props;
+    const { index, date, renderEvent, events, textStyles, onPress } = this.props;
     const cellStyles: any[] = [styles.cell];
     if (index === 0) {
         cellStyles.push(styles.leftBorder);
@@ -29,10 +30,12 @@ class CalendarDay extends React.Component<CalendarDayProps> {
 
     return (
         <View key={date.getTime()} style={cellStyles}>
-            <Text style={[styles.text, textStyles]}>
-                {date.getDate()}
-            </Text>
-            {events.map(renderEvent)}
+            <TouchableOpacity style={styles.touchableOpacity} onPress={() => onPress && onPress(date)}>
+                <Text style={[styles.text, textStyles]}>
+                    {date.getDate()}
+                </Text>
+                {events.map(renderEvent)}
+            </TouchableOpacity>
         </View>
     );
   }
@@ -57,6 +60,9 @@ const styles = StyleSheet.create({
     },
     text: {
         textAlign: 'center',
+    },
+    touchableOpacity: {
+        minHeight: 65
     }
 });
 
