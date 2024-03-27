@@ -1,4 +1,10 @@
-# React Native Month View Calendar
+[![version](https://badge.fury.io/js/%40iftek%2Freact-native-month-view-calendar.svg)](https://www.npmjs.com/package/@iftek/react-native-month-view-calendar)
+[![downloads](https://img.shields.io/npm/dt/@iftek/react-native-month-view-calendar.svg?style=flat-square)](https://npm-stat.com/charts.html?package=@iftek/react-native-month-view-calendar&from=2021-03-24)
+
+# @iftek/react-native-month-view-calendar
+React Native Month View Calendar
+
+- Fork from [react-native-month-view-calendar](https://github.com/strappberry/react-native-month-view-calendar)
 
 <p>
 <img src="screenshots/1.png?raw=1" width="200" />
@@ -9,13 +15,13 @@
 ## Install
 
 ```
-npm install --save react-native-month-view-calendar
+npm install --save @iftek/react-native-month-view-calendar
 ```
 
 ### Basic usage
 ```js
 import React from 'react';
-import MonthViewCalendar from 'react-native-month-view-calendar';
+import MonthViewCalendar from '@iftek/react-native-month-view-calendar';
 import { View, ScrollView } from 'react-native'
 
 const Component = () => {

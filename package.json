@@ -1,6 +1,6 @@
 {
-  "name": "react-native-month-view-calendar",
-  "version": "1.0.1",
+  "name": "@iftek/react-native-month-view-calendar",
+  "version": "1.0.0",
   "description": "Calendar month view to display events",
   "main": "lib/index.js",
   "scripts": {
@@ -19,13 +19,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/strappberry/react-native-month-view-calendar.git"
+    "url": "git+https://github.com/yuan9090/react-native-month-view-calendar.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/strappberry/react-native-month-view-calendar/issues"
+    "url": "https://github.com/yuan9090/react-native-month-view-calendar/issues"
   },
-  "homepage": "https://github.com/strappberry/react-native-month-view-calendar#readme"
+  "homepage": "https://github.com/yuan9090/react-native-month-view-calendar#readme"
 }
