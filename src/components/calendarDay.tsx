@@ -28,7 +28,7 @@ class CalendarDay extends React.Component<CalendarDayProps> {
     }
 
     return (
-        <View style={cellStyles}>
+        <View key={date.getTime()} style={cellStyles}>
             <Text style={[styles.text, textStyles]}>
                 {date.getDate()}
             </Text>
