@@ -15,7 +15,7 @@ npm install --save react-native-month-view-calendar
 ### Basic usage
 ```js
 import React from 'react';
-import { MonthViewCalendar } from 'react-native-month-view-calendar';
+import MonthViewCalendar from 'react-native-month-view-calendar';
 import { View, ScrollView } from 'react-native'
 
 const Component = () => {
