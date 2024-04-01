@@ -1,5 +1,5 @@
 [![version](https://badge.fury.io/js/%40iftek%2Freact-native-month-view-calendar.svg)](https://www.npmjs.com/package/@iftek/react-native-month-view-calendar)
-[![downloads](https://img.shields.io/npm/dt/@iftek/react-native-month-view-calendar.svg?style=flat-square)](https://npm-stat.com/charts.html?package=@iftek/react-native-month-view-calendar&from=2021-03-24)
+[![downloads](https://img.shields.io/npm/dt/@iftek/react-native-month-view-calendar.svg?style=flat-square)](https://npm-stat.com/charts.html?package=@iftek/react-native-month-view-calendar&from=2024-03-24)
 
 # @iftek/react-native-month-view-calendar
 React Native Month View Calendar
