@@ -56,16 +56,14 @@ class MonthViewCalendar extends React.Component<MonthViewProps, MonthViewState> 
     currentPageIndex: number;
     monthVirtualList?: VirtualizedList<any>;
     eventsGridScrollX: Animated.Value;
-    movingScroll: boolean;
     now: Date;
 
     constructor(props: MonthViewProps) {
         super(props);
         this.now = new Date();
-        this.pageOffset = 2;
+        this.pageOffset = 0;
         this.currentPageIndex = this.pageOffset;
         this.eventsGridScrollX = new Animated.Value(0);
-        this.movingScroll = false;
 
         if (props.weekDays.length != 7) {
             throw new WeekDaysLenghtError(props.weekDays.length.toString());
@@ -157,57 +155,52 @@ class MonthViewCalendar extends React.Component<MonthViewProps, MonthViewState> 
     }
 
     scrollBegin = (event: any) => {
-        this.movingScroll = true;
-    }
-
-    scrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-        if(!this.movingScroll) return;
-        this.movingScroll = false;
         const {
-          nativeEvent: { contentOffset, contentSize },
-        } = event;
-        const { x: position } = contentOffset;
-        const { width: innerWidth } = contentSize;
-        const { datesList } = this.state;
-        const { onSwipe, onSwipePrev, onSwipeNext } = this.props;
-    
-        const previousIndex = Number(this.currentPageIndex);
-        const newIndex = Math.round((position / innerWidth) * datesList.length);
-        const movedPages = newIndex -  this.currentPageIndex;
-        this.currentPageIndex = newIndex;
-    
-        const newDate = datesList[this.currentPageIndex];
-        const newState: any = {
-          currentDate: newDate,
-        };
-        let newStateCallback = () => {};
-        if (movedPages < 0 && newIndex < this.pageOffset) {
-          this.prependPagesInPlace(datesList, 1);
-          this.currentPageIndex += 1;
-    
-          newState.datesList = [...datesList];
-          const scrollToCurrentIndex = () =>
-            this.monthVirtualList?.scrollToIndex({
-              index: this.currentPageIndex,
-              animated: false,
-            });
-          newStateCallback = () => setTimeout(scrollToCurrentIndex, 0);
-        } else if (
-          movedPages > 0 &&
-          newIndex >= this.state.datesList.length - this.pageOffset
-        ) {
-          this.appendPagesInPlace(datesList, 1);
-          newState.datesList = [...datesList];
-        }
-        this.setState(newState, newStateCallback);
-    
-        previousIndex != newIndex && onSwipe && onSwipe(datesList[this.currentPageIndex]);
-        if (newIndex > previousIndex) {
-          onSwipeNext && onSwipeNext(datesList[this.currentPageIndex]);
-        } else if(newIndex < previousIndex) {
-          onSwipePrev && onSwipePrev(datesList[this.currentPageIndex]);
-        }
-      }
+            nativeEvent: { contentOffset, contentSize },
+          } = event;
+          
+          const { x: position } = contentOffset;
+          const { width: innerWidth } = contentSize;
+          const { datesList } = this.state;
+          const { onSwipe, onSwipePrev, onSwipeNext } = this.props;
+      
+          const previousIndex = Number(this.currentPageIndex);
+          const newIndex = Math.round((position / (innerWidth / 5)) * datesList.length);
+          const movedPages = newIndex -  this.currentPageIndex;
+          this.currentPageIndex = newIndex;
+      
+          const newDate = datesList[this.currentPageIndex];
+          const newState: any = {
+            currentDate: newDate,
+          };
+          let newStateCallback = () => {};
+          if (movedPages < 0 && newIndex < this.pageOffset) {
+            this.prependPagesInPlace(datesList, 1);
+            this.currentPageIndex += 1;
+      
+            newState.datesList = [...datesList];
+            const scrollToCurrentIndex = () =>
+              this.monthVirtualList?.scrollToIndex({
+                index: this.currentPageIndex,
+                animated: false,
+              });
+            newStateCallback = () => setTimeout(scrollToCurrentIndex, 0);
+          } else if (
+            movedPages > 0 &&
+            newIndex >= this.state.datesList.length - this.pageOffset
+          ) {
+            this.appendPagesInPlace(datesList, 1);
+            newState.datesList = [...datesList];
+          }
+          this.setState(newState, newStateCallback);
+  
+          previousIndex != newIndex && onSwipe && onSwipe(datesList[this.currentPageIndex]);
+          if (newIndex > previousIndex) {
+            onSwipeNext && onSwipeNext(datesList[this.currentPageIndex]);
+          } else if(newIndex < previousIndex) {
+            onSwipePrev && onSwipePrev(datesList[this.currentPageIndex]);
+          }
+    }
 
     setRefOfMonthVirtualList = (ref: VirtualizedList<any>) => {
         this.monthVirtualList = ref;
@@ -275,7 +268,6 @@ class MonthViewCalendar extends React.Component<MonthViewProps, MonthViewState> 
                     }}
                     pagingEnabled
                     onMomentumScrollBegin={this.scrollBegin}
-                    onMomentumScrollEnd={this.scrollEnd}
                     scrollEventThrottle={32}
                     onScroll={Animated.event(
                         [

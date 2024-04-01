@@ -1,5 +1,5 @@
 import React from 'react';
-import { VirtualizedList, Animated, NativeSyntheticEvent, NativeScrollEvent, ViewStyle } from 'react-native';
+import { VirtualizedList, Animated, ViewStyle } from 'react-native';
 import { Event } from './contracts/event';
 interface MonthViewProps {
     date: Date;
@@ -66,7 +66,6 @@ declare class MonthViewCalendar extends React.Component<MonthViewProps, MonthVie
      */
     scrollTo: (index: number, animated?: boolean) => void;
     scrollBegin: (event: any) => void;
-    scrollEnd: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
     setRefOfMonthVirtualList: (ref: VirtualizedList<any>) => void;
     renderWeekCalendar(date: Date): React.ReactNode;
     componentDidUpdate(prevProps: Readonly<MonthViewProps>): void;
