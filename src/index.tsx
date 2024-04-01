@@ -243,6 +243,12 @@ class MonthViewCalendar extends React.Component<MonthViewProps, MonthViewState> 
         ))
     }
 
+    componentDidUpdate(prevProps: Readonly<MonthViewProps>): void {
+        if (this.props.date !== prevProps.date) {
+            this.calculateInitialDates(this.props.date);
+        }
+    }
+
     render(): React.ReactNode {
         const { weekDays, headerTextStyles } = this.props;
 

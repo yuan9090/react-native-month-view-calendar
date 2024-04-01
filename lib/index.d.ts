@@ -69,6 +69,7 @@ declare class MonthViewCalendar extends React.Component<MonthViewProps, MonthVie
     scrollEnd: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
     setRefOfMonthVirtualList: (ref: VirtualizedList<any>) => void;
     renderWeekCalendar(date: Date): React.ReactNode;
+    componentDidUpdate(prevProps: Readonly<MonthViewProps>): void;
     render(): React.ReactNode;
 }
 export default MonthViewCalendar;
