@@ -19,6 +19,7 @@ interface MonthViewProps {
     headerTextStyles: any,
     dayTextStyles?: any,
     otherMonthsDayTextStyles?: TextStyle,
+    otherMonthsEnabled?: boolean,
     pastMonthsCellStyles?: ViewStyle,
     cellStyles?: ViewStyle,
     renderEvent: (event: Event, index: number) => any,
@@ -236,6 +237,7 @@ class MonthViewCalendar extends React.Component<MonthViewProps, MonthViewState> 
                             renderEvent={this.props.renderEvent}
                             textStyles={isSameMonth ? this.props.dayTextStyles: this.props.otherMonthsDayTextStyles}
                             viewStyles={viewStyles}
+                            onPressEnabled={isSameMonth || !!this.props.otherMonthsEnabled}
                             onPress={this.props.onPress}
                         />
                     )

@@ -9,6 +9,7 @@ interface CalendarDayProps {
     events: Event[];
     textStyles: {} | [];
     viewStyles: {} | [];
+    onPressEnabled: boolean;
     onPress?: (date: Date) => void;
 }
 
@@ -16,7 +17,7 @@ class CalendarDay extends React.Component<CalendarDayProps> {
   static defaultProps: { textStyles: {}; viewStyles: {}; };
 
   render() {
-    const { index, date, renderEvent, events, textStyles, onPress } = this.props;
+    const { index, date, renderEvent, events, textStyles, onPress, onPressEnabled } = this.props;
     const cellStyles: any[] = [styles.cell];
     if (index === 0) {
         cellStyles.push(styles.leftBorder);
@@ -30,7 +31,7 @@ class CalendarDay extends React.Component<CalendarDayProps> {
 
     return (
         <View key={date.getTime()} style={cellStyles}>
-            <TouchableOpacity style={styles.touchableOpacity} onPress={() => onPress && onPress(date)}>
+            <TouchableOpacity disabled={!onPressEnabled} style={styles.touchableOpacity} onPress={() => onPress && onPress(date)}>
                 <Text style={[styles.text, textStyles]}>
                     {date.getDate()}
                 </Text>

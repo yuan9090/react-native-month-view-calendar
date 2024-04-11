@@ -7,6 +7,7 @@ interface CalendarDayProps {
     events: Event[];
     textStyles: {} | [];
     viewStyles: {} | [];
+    onPressEnabled: boolean;
     onPress?: (date: Date) => void;
 }
 declare class CalendarDay extends React.Component<CalendarDayProps> {

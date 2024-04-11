@@ -8,6 +8,7 @@ interface MonthViewProps {
     headerTextStyles: any;
     dayTextStyles?: any;
     otherMonthsDayTextStyles?: TextStyle;
+    otherMonthsEnabled?: boolean;
     pastMonthsCellStyles?: ViewStyle;
     cellStyles?: ViewStyle;
     renderEvent: (event: Event, index: number) => any;
