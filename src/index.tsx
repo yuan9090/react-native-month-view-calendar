@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, VirtualizedList, Animated, StyleSheet, NativeSyntheticEvent, NativeScrollEvent, Text, ViewStyle } from 'react-native'
+import { View, VirtualizedList, Animated, StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { Event } from './contracts/event';
 import CalendarHeader from './components/calendarHeader';
 import CalendarRow from './components/calendarRow';
@@ -18,6 +18,7 @@ interface MonthViewProps {
     events: Event[],
     headerTextStyles: any,
     dayTextStyles?: any,
+    otherMonthsDayTextStyles?: TextStyle,
     pastMonthsCellStyles?: ViewStyle,
     cellStyles?: ViewStyle,
     renderEvent: (event: Event, index: number) => any,
@@ -43,6 +44,7 @@ class MonthViewCalendar extends React.Component<MonthViewProps, MonthViewState> 
         weekDays: string[];
         headerTextStyles: {};
         dayTextStyles: {};
+        otherMonthsDayTextStyles: {},
         pastMonthsCellStyles: {};
         cellStyles: {};
     };
@@ -217,6 +219,7 @@ class MonthViewCalendar extends React.Component<MonthViewProps, MonthViewState> 
             <CalendarRow key={`week-${i}`}>
                 {week.map((day: Date, j: number) => {
                     day.setHours(23, 59, 59)
+                    const isSameMonth = day.getMonth() == date.getMonth() && day.getFullYear() == date.getFullYear()
                     const eventsOfDay = findEventsForTheDay(day, this.props.events)
                     const viewStyles = [
                         this.props.cellStyles,
@@ -231,7 +234,7 @@ class MonthViewCalendar extends React.Component<MonthViewProps, MonthViewState> 
                             date={day}
                             events={eventsOfDay}
                             renderEvent={this.props.renderEvent}
-                            textStyles={this.props.dayTextStyles}
+                            textStyles={isSameMonth ? this.props.dayTextStyles: this.props.otherMonthsDayTextStyles}
                             viewStyles={viewStyles}
                             onPress={this.props.onPress}
                         />
@@ -300,6 +303,7 @@ MonthViewCalendar.defaultProps = {
     weekDays: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
     headerTextStyles: {},
     dayTextStyles: {},
+    otherMonthsDayTextStyles: {},
     pastMonthsCellStyles: {},
     cellStyles: {},
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { VirtualizedList, Animated, ViewStyle } from 'react-native';
+import { VirtualizedList, Animated, TextStyle, ViewStyle } from 'react-native';
 import { Event } from './contracts/event';
 interface MonthViewProps {
     date: Date;
@@ -7,6 +7,7 @@ interface MonthViewProps {
     events: Event[];
     headerTextStyles: any;
     dayTextStyles?: any;
+    otherMonthsDayTextStyles?: TextStyle;
     pastMonthsCellStyles?: ViewStyle;
     cellStyles?: ViewStyle;
     renderEvent: (event: Event, index: number) => any;
@@ -30,6 +31,7 @@ declare class MonthViewCalendar extends React.Component<MonthViewProps, MonthVie
         weekDays: string[];
         headerTextStyles: {};
         dayTextStyles: {};
+        otherMonthsDayTextStyles: {};
         pastMonthsCellStyles: {};
         cellStyles: {};
     };
