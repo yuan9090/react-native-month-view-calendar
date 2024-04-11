@@ -52,6 +52,8 @@ class MonthViewCalendar extends React.Component<MonthViewProps, MonthViewState> 
         datesList: [],
     }
 
+    CONTAINER_HEIGHT: number;
+    HEADER_HEIGHT: number;
     pageOffset: number;
     currentPageIndex: number;
     monthVirtualList?: VirtualizedList<any>;
@@ -61,6 +63,8 @@ class MonthViewCalendar extends React.Component<MonthViewProps, MonthViewState> 
     constructor(props: MonthViewProps) {
         super(props);
         this.now = new Date();
+        this.CONTAINER_HEIGHT = 0;
+        this.HEADER_HEIGHT = 50;
         this.pageOffset = 0;
         this.currentPageIndex = this.pageOffset;
         this.eventsGridScrollX = new Animated.Value(0);
@@ -216,6 +220,7 @@ class MonthViewCalendar extends React.Component<MonthViewProps, MonthViewState> 
                     const eventsOfDay = findEventsForTheDay(day, this.props.events)
                     const viewStyles = [
                         this.props.cellStyles,
+                        { height: ((this.CONTAINER_HEIGHT - this.HEADER_HEIGHT) / days.length)},
                         (this.now > day ? this.props.pastMonthsCellStyles : {})
                     ];
 
@@ -246,7 +251,7 @@ class MonthViewCalendar extends React.Component<MonthViewProps, MonthViewState> 
         const { weekDays, headerTextStyles } = this.props;
 
         return (
-            <View style={styles.calendarContainer}>
+            <View style={styles.calendarContainer} onLayout={event=> {this.CONTAINER_HEIGHT = event.nativeEvent.layout.height}}>
                 <VirtualizedList
                     ref={this.setRefOfMonthVirtualList}
                     keyExtractor={(item) => item}
@@ -257,7 +262,7 @@ class MonthViewCalendar extends React.Component<MonthViewProps, MonthViewState> 
                     horizontal
                     renderItem={({item}) => {
                         return (
-                            <View style={{ width: CONTAINER_WIDTH }}>
+                            <View style={{ width: CONTAINER_WIDTH, height: this.HEADER_HEIGHT }}>
                                 <CalendarHeader
                                 weekDays={weekDays}
                                 textStyles={headerTextStyles}
@@ -301,6 +306,7 @@ MonthViewCalendar.defaultProps = {
 
 const styles = StyleSheet.create({
     calendarContainer: {
+        flex: 1,
         minHeight: 300,
         width: '100%',
     },

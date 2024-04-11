@@ -34,11 +34,12 @@ declare class MonthViewCalendar extends React.Component<MonthViewProps, MonthVie
         cellStyles: {};
     };
     state: MonthViewState;
+    CONTAINER_HEIGHT: number;
+    HEADER_HEIGHT: number;
     pageOffset: number;
     currentPageIndex: number;
     monthVirtualList?: VirtualizedList<any>;
     eventsGridScrollX: Animated.Value;
-    movingScroll: boolean;
     now: Date;
     constructor(props: MonthViewProps);
     /**
