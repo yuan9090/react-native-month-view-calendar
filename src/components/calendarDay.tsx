@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     touchableOpacity: {
+        height: '100%',
         minHeight: 65
     }
 });
