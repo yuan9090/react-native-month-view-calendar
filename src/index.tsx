@@ -163,49 +163,20 @@ class MonthViewCalendar extends React.Component<MonthViewProps, MonthViewState> 
 
     scrollBegin = (event: any) => {
         const {
-            nativeEvent: { contentOffset, contentSize },
+            nativeEvent: { contentOffset },
           } = event;
           
           const { x: position } = contentOffset;
-          const { width: innerWidth } = contentSize;
-          const { datesList } = this.state;
-          const { onSwipe, onSwipePrev, onSwipeNext } = this.props;
+          const { date, onSwipe, onSwipePrev, onSwipeNext } = this.props;
       
-          const previousIndex = Number(this.currentPageIndex);
-          const newIndex = Math.round((position / (innerWidth / 5)) * datesList.length);
-          const movedPages = newIndex -  this.currentPageIndex;
-          this.currentPageIndex = newIndex;
-      
-          const newDate = datesList[this.currentPageIndex];
-          const newState: any = {
-            currentDate: newDate,
-          };
-          let newStateCallback = () => {};
-          if (movedPages < 0 && newIndex < this.pageOffset) {
-            this.prependPagesInPlace(datesList, 1);
-            this.currentPageIndex += 1;
-      
-            newState.datesList = [...datesList];
-            const scrollToCurrentIndex = () =>
-              this.monthVirtualList?.scrollToIndex({
-                index: this.currentPageIndex,
-                animated: false,
-              });
-            newStateCallback = () => setTimeout(scrollToCurrentIndex, 0);
-          } else if (
-            movedPages > 0 &&
-            newIndex >= this.state.datesList.length - this.pageOffset
-          ) {
-            this.appendPagesInPlace(datesList, 1);
-            newState.datesList = [...datesList];
-          }
-          this.setState(newState, newStateCallback);
+          const newIndex = position > 50 ? 1 : position < -50 ? -1 : 0;
+          const newDate = new Date(date.setMonth(date.getMonth() + newIndex))
   
-          previousIndex != newIndex && onSwipe && onSwipe(datesList[this.currentPageIndex]);
-          if (newIndex > previousIndex) {
-            onSwipeNext && onSwipeNext(datesList[this.currentPageIndex]);
-          } else if(newIndex < previousIndex) {
-            onSwipePrev && onSwipePrev(datesList[this.currentPageIndex]);
+          newIndex !== 0 && onSwipe && onSwipe(newDate);
+          if (newIndex > 0) {
+            onSwipeNext && onSwipeNext(newDate);
+          } else if(newIndex < 0) {
+            onSwipePrev && onSwipePrev(newDate);
           }
     }
 
