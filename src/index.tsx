@@ -16,8 +16,9 @@ interface MonthViewProps {
     date: Date,
     weekDays: string[],
     events: Event[],
-    headerTextStyles: any,
-    dayTextStyles?: any,
+    headerTextStyles: TextStyle,
+    dayTextStyles?: TextStyle,
+    todayTextStyles?: TextStyle,
     otherMonthsDayTextStyles?: TextStyle,
     otherMonthsEnabled?: boolean,
     pastMonthsCellStyles?: ViewStyle,
@@ -192,12 +193,23 @@ class MonthViewCalendar extends React.Component<MonthViewProps, MonthViewState> 
                 {week.map((day: Date, j: number) => {
                     day.setHours(23, 59, 59)
                     const isSameMonth = day.getMonth() == date.getMonth() && day.getFullYear() == date.getFullYear()
+                    const isToday = day.getDate() === new Date().getDate()
                     const eventsOfDay = findEventsForTheDay(day, this.props.events)
                     const viewStyles = [
                         this.props.cellStyles,
                         { height: ((this.CONTAINER_HEIGHT - this.HEADER_HEIGHT) / days.length)},
                         (this.now > day ? this.props.pastMonthsCellStyles : {})
                     ];
+
+                    let textStyles
+                    if (isSameMonth) {
+                        textStyles = this.props.dayTextStyles
+                        if (isToday && this.props.todayTextStyles) {
+                            textStyles = this.props.todayTextStyles
+                        }
+                    } else {
+                        textStyles = this.props.otherMonthsDayTextStyles
+                    }
 
                     return (
                         <CalendarDay
@@ -206,7 +218,7 @@ class MonthViewCalendar extends React.Component<MonthViewProps, MonthViewState> 
                             date={day}
                             events={eventsOfDay}
                             renderEvent={this.props.renderEvent}
-                            textStyles={isSameMonth ? this.props.dayTextStyles: this.props.otherMonthsDayTextStyles}
+                            textStyles={textStyles}
                             viewStyles={viewStyles}
                             onPressEnabled={isSameMonth || !!this.props.otherMonthsEnabled}
                             onPress={this.props.onPress}

@@ -53,6 +53,7 @@ const Component = () => {
 | --- | --- | ---|
 |date            |new Date()|Date from which the calendar will be built|
 |dayTextStyles   |{}|Styles for label day(numer of day), can be array or object|
+|todayTextStyles |{}|Styles for label day(today), can be array or object|
 |otherMonthsDayTextStyles   |{}|Styles for label day(numer of day) `other months`, can be array or object|
 |otherMonthsEnabled   |false|other months day cell onPress enabled or not|
 |events          || Array of events|

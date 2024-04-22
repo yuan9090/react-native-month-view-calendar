@@ -5,8 +5,9 @@ interface MonthViewProps {
     date: Date;
     weekDays: string[];
     events: Event[];
-    headerTextStyles: any;
-    dayTextStyles?: any;
+    headerTextStyles: TextStyle;
+    dayTextStyles?: TextStyle;
+    todayTextStyles?: TextStyle;
     otherMonthsDayTextStyles?: TextStyle;
     otherMonthsEnabled?: boolean;
     pastMonthsCellStyles?: ViewStyle;

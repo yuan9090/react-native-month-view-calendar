@@ -32,9 +32,11 @@ class CalendarDay extends React.Component<CalendarDayProps> {
     return (
         <View key={date.getTime()} style={cellStyles}>
             <TouchableOpacity disabled={!onPressEnabled} style={styles.touchableOpacity} onPress={() => onPress && onPress(date)}>
-                <Text style={[styles.text, textStyles]}>
-                    {date.getDate()}
-                </Text>
+                <View style={[styles.text, textStyles]}>
+                    <Text style={textStyles}>
+                        {date.getDate()}
+                    </Text>
+                </View>
                 {events.map(renderEvent)}
             </TouchableOpacity>
         </View>
@@ -60,7 +62,11 @@ const styles = StyleSheet.create({
         borderLeftWidth: 1,
     },
     text: {
-        textAlign: 'center',
+        height: 22,
+        width: 22,
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     touchableOpacity: {
         height: '100%',
