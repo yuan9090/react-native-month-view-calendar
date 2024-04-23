@@ -6,7 +6,7 @@ interface MonthViewProps {
     weekDays: string[];
     events: Event[];
     headerTextStyles: TextStyle;
-    dayTextStyles?: TextStyle;
+    dayTextStyles?: ((date: Date) => TextStyle) | TextStyle;
     todayTextStyles?: TextStyle;
     otherMonthsDayTextStyles?: TextStyle;
     otherMonthsEnabled?: boolean;

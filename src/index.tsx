@@ -17,7 +17,7 @@ interface MonthViewProps {
     weekDays: string[],
     events: Event[],
     headerTextStyles: TextStyle,
-    dayTextStyles?: TextStyle,
+    dayTextStyles?: ((day: Date) => TextStyle) | TextStyle,
     todayTextStyles?: TextStyle,
     otherMonthsDayTextStyles?: TextStyle,
     otherMonthsEnabled?: boolean,
@@ -200,10 +200,11 @@ class MonthViewCalendar extends React.Component<MonthViewProps, MonthViewState> 
                         { height: ((this.CONTAINER_HEIGHT - this.HEADER_HEIGHT) / days.length)},
                         (this.now > day ? this.props.pastMonthsCellStyles : {})
                     ];
-
+                    
                     let textStyles
+                    const getTextStyle = typeof this.props.dayTextStyles === 'function' ? this.props.dayTextStyles : () => this.props.dayTextStyles
                     if (isSameMonth) {
-                        textStyles = this.props.dayTextStyles
+                        textStyles = getTextStyle(day)
                         if (isToday && this.props.todayTextStyles) {
                             textStyles = this.props.todayTextStyles
                         }

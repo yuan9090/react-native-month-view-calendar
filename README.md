@@ -49,24 +49,24 @@ const Component = () => {
 ```
 ### Props
 
-| Properties | Default | Description|
-| --- | --- | ---|
-|date            |new Date()|Date from which the calendar will be built|
-|dayTextStyles   |{}|Styles for label day(numer of day), can be array or object|
-|todayTextStyles |{}|Styles for label day(today), can be array or object|
-|otherMonthsDayTextStyles   |{}|Styles for label day(numer of day) `other months`, can be array or object|
-|otherMonthsEnabled   |false|other months day cell onPress enabled or not|
-|events          || Array of events|
-|headerTextStyles|{}|Styles for label week day name, can be array or object|
-|cellStyles      |{}|Styles for all cells|
-|pastMonthsCellStyles|{}|Styles for all cells from past dates|
-|weekDays        |['S', 'M', 'T', 'W', 'T', 'F', 'S']|Array with name of the day of the week|
-|renderEvent     ||Function required to render event information. Example (event, index) => <Event key={index} />|
-|onPress         ||Callback when day cell is pressed|
-|onSwipe         ||Callback when calendar is swiped|
-|onSwipePrev     ||Callback when calendar is swiped to previous month|
-|onSwipeNext     ||Callback when calendar is swiped to next month|
-|onScrollToIndexFailed || Callback to handle errors on swipe|
+| Properties | Default | type | Description|
+| --- | --- | --- | --- |
+|date            |new Date()||Date from which the calendar will be built|
+|dayTextStyles   |{}|TextStyle \| (day:Date) => TextStyle|Styles for label day(numer of day), can be function, array or object|
+|todayTextStyles |{}||Styles for label day(today), can be array or object|
+|otherMonthsDayTextStyles   |{}||Styles for label day(numer of day) `other months`, can be array or object|
+|otherMonthsEnabled   |false||other months day cell onPress enabled or not|
+|events          ||| Array of events|
+|headerTextStyles|{}||Styles for label week day name, can be array or object|
+|cellStyles      |{}||Styles for all cells|
+|pastMonthsCellStyles|{}||Styles for all cells from past dates|
+|weekDays        |['S', 'M', 'T', 'W', 'T', 'F', 'S']||Array with name of the day of the week|
+|renderEvent     |||Function required to render event information. Example (event, index) => <Event key={index} />|
+|onPress         |||Callback when day cell is pressed|
+|onSwipe         |||Callback when calendar is swiped|
+|onSwipePrev     |||Callback when calendar is swiped to previous month|
+|onSwipeNext     |||Callback when calendar is swiped to next month|
+|onScrollToIndexFailed ||| Callback to handle errors on swipe|
 
 ### Methods
 To use the component methods save a reference to it:
