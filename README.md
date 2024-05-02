@@ -58,7 +58,7 @@ const Component = () => {
 |otherMonthsEnabled   |false||other months day cell onPress enabled or not|
 |events          ||| Array of events|
 |headerTextStyles|{}||Styles for label week day name, can be array or object|
-|cellStyles      |{}||Styles for all cells|
+|cellStyles      |{}|ViewStyle \| (day:Date) => ViewStyle|Styles for all cells, can be function, array or object|
 |pastMonthsCellStyles|{}||Styles for all cells from past dates|
 |weekDays        |['S', 'M', 'T', 'W', 'T', 'F', 'S']||Array with name of the day of the week|
 |renderEvent     |||Function required to render event information. Example (event, index) => <Event key={index} />|

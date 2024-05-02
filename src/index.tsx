@@ -22,7 +22,7 @@ interface MonthViewProps {
     otherMonthsDayTextStyles?: TextStyle,
     otherMonthsEnabled?: boolean,
     pastMonthsCellStyles?: ViewStyle,
-    cellStyles?: ViewStyle,
+    cellStyles?: ((day: Date) => ViewStyle) | ViewStyle,
     renderEvent: (event: Event, index: number) => any,
     onPress?: (date: Date) => void,
     onSwipe?: (date: Date) => void,
@@ -195,8 +195,10 @@ class MonthViewCalendar extends React.Component<MonthViewProps, MonthViewState> 
                     const isSameMonth = day.getMonth() == date.getMonth() && day.getFullYear() == date.getFullYear()
                     const isToday = day.getDate() === new Date().getDate()
                     const eventsOfDay = findEventsForTheDay(day, this.props.events)
-                    const viewStyles = [
-                        this.props.cellStyles,
+
+                    const getViewStyle = typeof this.props.cellStyles === 'function' ? this.props.cellStyles : () => this.props.cellStyles
+                    let viewStyles = [
+                        getViewStyle(day),
                         { height: ((this.CONTAINER_HEIGHT - this.HEADER_HEIGHT) / days.length)},
                         (this.now > day ? this.props.pastMonthsCellStyles : {})
                     ];

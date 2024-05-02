@@ -6,12 +6,12 @@ interface MonthViewProps {
     weekDays: string[];
     events: Event[];
     headerTextStyles: TextStyle;
-    dayTextStyles?: ((date: Date) => TextStyle) | TextStyle;
+    dayTextStyles?: ((day: Date) => TextStyle) | TextStyle;
     todayTextStyles?: TextStyle;
     otherMonthsDayTextStyles?: TextStyle;
     otherMonthsEnabled?: boolean;
     pastMonthsCellStyles?: ViewStyle;
-    cellStyles?: ViewStyle;
+    cellStyles?: ((day: Date) => ViewStyle) | ViewStyle;
     renderEvent: (event: Event, index: number) => any;
     onPress?: (date: Date) => void;
     onSwipe?: (date: Date) => void;
