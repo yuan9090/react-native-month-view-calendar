@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Event } from '../contracts/event';
 
 interface CalendarDayProps {
@@ -32,11 +32,17 @@ class CalendarDay extends React.Component<CalendarDayProps> {
     return (
         <View key={date.getTime()} style={cellStyles}>
             <TouchableOpacity disabled={!onPressEnabled} style={styles.touchableOpacity} onPress={() => onPress && onPress(date)}>
-                <View style={[styles.text, textStyles]}>
-                    <Text style={textStyles}>
-                        {date.getDate()}
-                    </Text>
-                </View>
+                {
+                    Platform.OS === 'ios'
+                    ?   <View style={[styles.textView, textStyles]}>
+                            <Text style={textStyles}>
+                                {date.getDate()}
+                            </Text>
+                        </View>
+                    :   <Text style={[styles.text, textStyles]}>
+                            {date.getDate()}
+                        </Text>
+                }
                 {events.map(renderEvent)}
             </TouchableOpacity>
         </View>
@@ -61,12 +67,18 @@ const styles = StyleSheet.create({
     leftBorder: {
         borderLeftWidth: 1,
     },
-    text: {
+    textView: {
         height: 22,
         width: 22,
         alignSelf: 'center',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
+    },
+    text: {
+        height: 22,
+        width: 22,
+        alignSelf: 'center',
+        textAlign: 'center'
     },
     touchableOpacity: {
         height: '100%',
